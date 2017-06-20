@@ -8,9 +8,11 @@ def main():
   options = get_args()
 
   algorithm = get_algorithm(options)
+  
+  nbits = get_bits(options)
 
   # https://en.bitcoin.it/wiki/Difficulty
-  bits, target   = get_difficulty(algorithm)
+  bits, target   = get_difficulty(nbits)
 
   input_script  = create_input_script(options.timestamp)
   output_script = create_output_script(options.pubkey)
@@ -38,6 +40,8 @@ def get_args():
                    type="string", help="the pubkey found in the output script")
   parser.add_option("-v", "--value", dest="value", default=5000000000,
                    type="int", help="the value in coins for the output, full value (exp. in bitcoin 5000000000 - To get other coins value: Block Value * 100000000)")
+  parser.add_option("-b", "--bits", dest="bits", default=0x1d00ffff,
+                   type="int", help="nbits")
 
   (options, args) = parser.parse_args()
   return options
@@ -49,13 +53,18 @@ def get_algorithm(options):
   else:
     sys.exit("Error: Given algorithm must be one of: " + str(supported_algorithms))
 
-def get_difficulty(algorithm):
-  if algorithm == "scrypt":
-    return 0x1e0ffff0, 0x0ffff0 * 2**(8*(0x1e - 3))
-  elif algorithm == "SHA256":
-    return 0x1e090000, 0x090000 * 2**(8*(0x1e - 3))
-  elif algorithm == "X11" or algorithm == "X13" or algorithm == "X15":
-    return 0x1e0ffff0, 0x0ffff0 * 2**(8*(0x1e - 3))
+def get_bits(options):
+  #TODO: add conditional judgment
+  return options.bits
+
+def get_difficulty(bits):
+    #if algorithm == "scrypt":
+    #return 0x1e0ffff0, 0x0ffff0 * 2**(8*(0x1e - 3))
+    #elif algorithm == "SHA256":
+    #return 0x1e090000, 0x090000 * 2**(8*(0x1e - 3))
+    #elif algorithm == "X11" or algorithm == "X13" or algorithm == "X15":
+    #return 0x1e0ffff0, 0x0ffff0 * 2**(8*(0x1e - 3))
+    return bits, (bits % 0x01000000) * 2 ** (8*(bits//0x01000000 - 3))
 
 def create_input_script(psz_timestamp):
   psz_prefix = ""
