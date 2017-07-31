@@ -26,25 +26,47 @@ def main():
   announce_found_genesis(genesis_hash, nonce)
 
 
-def get_args():
-  parser = optparse.OptionParser()
-  parser.add_option("-t", "--time", dest="time", default=int(time.time()), 
-                   type="int", help="the (unix) time when the genesisblock is created")
-  parser.add_option("-z", "--timestamp", dest="timestamp", default="The Times 03/Jan/2009 Chancellor on brink of second bailout for banks",
-                   type="string", help="the pszTimestamp found in the coinbase of the genesisblock")
-  parser.add_option("-n", "--nonce", dest="nonce", default=0,
-                   type="int", help="the first value of the nonce that will be incremented when searching the genesis hash")
-  parser.add_option("-a", "--algorithm", dest="algorithm", default="SHA256",
-                    help="the PoW algorithm: [SHA256|scrypt|X11|X13|X15]")
-  parser.add_option("-p", "--pubkey", dest="pubkey", default="04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f",
-                   type="string", help="the pubkey found in the output script")
-  parser.add_option("-v", "--value", dest="value", default=5000000000,
-                   type="int", help="the value in coins for the output, full value (exp. in bitcoin 5000000000 - To get other coins value: Block Value * 100000000)")
-  parser.add_option("-b", "--bits", dest="bits", default=0x1d00ffff,
-                   type="int", help="nbits")
+#def get_args():
+#  parser = optparse.OptionParser()
+#  parser.add_option("-t", "--time", dest="time", default=1231006505,
+#                   type="int", help="the (unix) time when the genesisblock is created")
+#  parser.add_option("-z", "--timestamp", dest="timestamp", default="The Times 03/Jan/2009 Chancellor on brink of second bailout for banks",
+#                   type="string", help="the pszTimestamp found in the coinbase of the genesisblock")
+#  parser.add_option("-n", "--nonce", dest="nonce", default=2083236893,
+#                   type="int", help="the first value of the nonce that will be incremented when searching the genesis hash")
+#  parser.add_option("-a", "--algorithm", dest="algorithm", default="SHA256",
+#                    help="the PoW algorithm: [SHA256|scrypt|X11|X13|X15]")
+#  parser.add_option("-p", "--pubkey", dest="pubkey", default="04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f",
+#                   type="string", help="the pubkey found in the output script")
+#  parser.add_option("-v", "--value", dest="value", default=5000000000,
+#                   type="int", help="the value in coins for the output, full value (exp. in bitcoin 5000000000 - To get other coins value: Block Value * 100000000)")
+#  parser.add_option("-b", "--bits", dest="bits", default=0x1d00ffff,
+#                   type="int", help="nbits")
+#
+#  (options, args) = parser.parse_args()
+#  return options
 
-  (options, args) = parser.parse_args()
-  return options
+
+def get_args():
+    parser = optparse.OptionParser()
+    parser.add_option("-t", "--time", dest="time", default=1411666331,
+                    type="int", help="the (unix) time when the genesisblock is created")
+    parser.add_option("-z", "--timestamp", dest="timestamp", default="shanghai stock index closed at 2343.57, on 24th Sept., 2014",
+                    type="string", help="the pszTimestamp found in the coinbase of the genesisblock")
+    parser.add_option("-n", "--nonce", dest="nonce", default=2056985438,
+                    type="int", help="the first value of the nonce that will be incremented when searching the genesis hash")
+    parser.add_option("-a", "--algorithm", dest="algorithm", default="SHA256",
+                    help="the PoW algorithm: [SHA256|scrypt|X11|X13|X15]")
+    parser.add_option("-p", "--pubkey", dest="pubkey", default="049e02fa9aa3c19a3b112a58bab503c5caf797972f5cfe1006275aa5485a01b48f9f648bc5380ee1e82dc6f474c8e0f7e2f6bbd0de9355f92496e3ea327ccb19cc",
+                    type="string", help="the pubkey found in the output script")
+    parser.add_option("-v", "--value", dest="value", default=10000000000,
+                    type="int", help="the value in coins for the output, full value (exp. in bitcoin 5000000000 - To get other coins value: Block Value * 100000000)")
+    parser.add_option("-b", "--bits", dest="bits", default=0x1d00ffff,
+                    type="int", help="nbits")
+                                    
+    (options, args) = parser.parse_args()
+    return options
+
 
 def get_algorithm(options):
   supported_algorithms = ["SHA256", "scrypt", "X11", "X13", "X15"]
